@@ -34,6 +34,11 @@ public class StaticList implements StaticInterface<Double>{
     }
 
     @Override
+    public void update(int index, Double data) {
+        this.data[index] = data;
+    }
+
+    @Override
     public void insert(int index, Double data){
         if (this.lastIndex == this.arraySize - 1)
             IOInterface.show("Structure is full");
@@ -82,12 +87,24 @@ public class StaticList implements StaticInterface<Double>{
 
     //type-returning methods
     @Override
+    public Double[] removeFromRange(int start, int end) {
+        int size = (end - start) + 1, count = 0;
+        Double[] removedItems = new Double[size];
+
+        for (int i = start; i <= end; i++){
+            removedItems[count] = this.remove(i);
+            count++;
+        }
+
+        return removedItems;
+    }
+
+    @Override
     public Double remove(int index){
         Double result = this.data[index];
 
         this.data[index] = null;
-        for (int i = index; i <= lastIndex; i++){
-            if (i + 1 < this.arraySize - 1)
+        for (int i = index; i < lastIndex; i++){
                 this.data[i+1] = this.data[i];
         }
         this.lastIndex--;
