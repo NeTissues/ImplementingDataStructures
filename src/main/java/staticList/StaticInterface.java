@@ -13,6 +13,11 @@ public interface StaticInterface<Type> {
     void insertLast(Type data);
     void readList();
 
+    Type remove(int index);
+    Type get(int index);
+
     boolean isEmpty();
     boolean isFull();
+
+    int size();
 }

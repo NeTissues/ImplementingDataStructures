@@ -10,15 +10,15 @@ public class StaticList implements StaticInterface<Double>{
 
     public int lastIndex;
 
-    public double[] data;
+    public Double[] data;
     public int arraySize;
 
     public StaticList() {}
 
-    //void returning methods
+    //void-returning methods
     @Override
     public void create(int arraySize){
-        this.data = new double[arraySize];
+        this.data = new Double[arraySize];
         this.arraySize = arraySize;
         this.lastIndex = -1;
         IOInterface.show("Created");
@@ -41,12 +41,6 @@ public class StaticList implements StaticInterface<Double>{
             IOInterface.show("Index lower than 0");
         }else if (index > this.arraySize - 1) {
             IOInterface.show("Index greater than array size");
-        /*}else if (index == 0) {
-            for (int i = this.lastIndex; i > 0; i--){//Search System.arraycopy() //IDK why, but I feel like this is bad
-                this.data[i+1] = this.data[i];
-            }
-            this.data[0] = data;
-            this.lastIndex++;*/
         }else {
             for (int i = this.lastIndex; i >= index; i--){//Search System.arraycopy() //IDK why, but I feel like this is bad
                 this.data[i+1] = this.data[i];
@@ -54,7 +48,6 @@ public class StaticList implements StaticInterface<Double>{
             this.data[index] = data;
             this.lastIndex++;
         }
-
     }
 
     @Override
@@ -76,7 +69,7 @@ public class StaticList implements StaticInterface<Double>{
         }catch (NullPointerException e){IOInterface.show("Null Pointer Exception has been thrown");}
     }
 
-    //boolean returning methods
+    //boolean-returning methods
     @Override
     public boolean isEmpty(){
         return this.lastIndex == -1;
@@ -85,5 +78,31 @@ public class StaticList implements StaticInterface<Double>{
     @Override
     public boolean isFull(){
         return ((this.arraySize - 1) == this.lastIndex);
+    }
+
+    //type-returning methods
+    @Override
+    public Double remove(int index){
+        Double result = this.data[index];
+
+        this.data[index] = null;
+        for (int i = index; i <= lastIndex; i++){
+            if (i + 1 < this.arraySize - 1)
+                this.data[i+1] = this.data[i];
+        }
+        this.lastIndex--;
+
+        return result;
+    }
+
+    @Override
+    public Double get(int index){
+        return this.data[index];
+    }
+
+    //integer-returning size
+    @Override
+    public int size(){
+        return arraySize;
     }
 }
