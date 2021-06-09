@@ -68,6 +68,7 @@ public class Main {
         IOInterface.show("- swap()"); nodeStack.swap();
         IOInterface.show("- push(3.0)");nodeStack.push(testingNode2);
         IOInterface.show("- rotateRight()");nodeStack.rotateRight();
+        IOInterface.show("- rotateLeft()");nodeStack.rotateLeft();
         IOInterface.show("---------------------------------");
 
     }

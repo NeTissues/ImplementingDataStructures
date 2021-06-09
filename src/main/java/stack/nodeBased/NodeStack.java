@@ -52,25 +52,26 @@ public class NodeStack<Type> implements NodeStackInterface<Type> {
     }
 
     @Override
-    public void rotateLeft() {//this might be wrong. Goes against the definition of a Stack
+    public void rotateLeft() {
         Node<Type> aux2 = this.head;
-        while (aux2.getNext() != null){
+        while (aux2.getNext().getNext() != null){
             aux2 = aux2.getNext();
         }
-        this.push(aux2);
-        // Remove aux2 here <-----
+        aux2.getNext().setNext(this.head);
+        this.head = aux2.getNext();
+        aux2.setNext(null);
     }
 
     @Override
     public Type peek() {
-        if (this.head == null)
+        if (this.isEmpty())
             throw new IndexOutOfBoundsException("Index out of bounds: Stack Underflow");
         return this.head.getValue();
     }
 
     @Override
     public Type pop() {
-        if (this.head == null)
+        if (this.isEmpty())
             throw new IndexOutOfBoundsException("Index out of bounds: Stack Underflow");
         Type result = this.head.getValue();
         this.head = this.head.getNext();
