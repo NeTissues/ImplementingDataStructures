@@ -1,5 +1,7 @@
 package staticList;
 
+import common.BasicStructures;
+
 /**
  * @author NeTissues
  * @param <Type> Generics definition of data type

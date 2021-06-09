@@ -8,7 +8,7 @@ import common.IOInterface;
  */
 public class StaticList implements StaticInterface<Double>{
 
-    public int lastIndex;
+    public int cursor;
 
     public Double[] data;
     public int arraySize;
@@ -20,7 +20,7 @@ public class StaticList implements StaticInterface<Double>{
     public void create(int arraySize){
         this.data = new Double[arraySize];
         this.arraySize = arraySize;
-        this.lastIndex = -1;
+        this.cursor = -1;
         IOInterface.show("Created");
     }
 
@@ -40,18 +40,18 @@ public class StaticList implements StaticInterface<Double>{
 
     @Override
     public void insert(int index, Double data){
-        if (this.lastIndex == this.arraySize - 1)
+        if (this.cursor == this.arraySize - 1)
             IOInterface.show("Structure is full");
         else if (index < 0) {
             IOInterface.show("Index lower than 0");
         }else if (index > this.arraySize - 1) {
             IOInterface.show("Index greater than array size");
         }else {
-            for (int i = this.lastIndex; i >= index; i--){//Search System.arraycopy() //IDK why, but I feel like this is bad
+            for (int i = this.cursor; i >= index; i--){//Search System.arraycopy() //IDK why, but I feel like this is bad
                 this.data[i+1] = this.data[i];
             }
             this.data[index] = data;
-            this.lastIndex++;
+            this.cursor++;
         }
     }
 
@@ -62,13 +62,13 @@ public class StaticList implements StaticInterface<Double>{
 
     @Override
     public void insertLast(Double data){
-        insert(this.lastIndex + 1, data);
+        insert(this.cursor + 1, data);
     }
 
     @Override
     public void readList(){
         try {
-            for (int i = 0; i <= this.lastIndex; i++) {
+            for (int i = 0; i <= this.cursor; i++) {
                 IOInterface.show("Data" + "[" + i + "] = " + this.data[i]);
             }
         }catch (NullPointerException e){IOInterface.show("Null Pointer Exception has been thrown");}
@@ -77,12 +77,12 @@ public class StaticList implements StaticInterface<Double>{
     //boolean-returning methods
     @Override
     public boolean isEmpty(){
-        return this.lastIndex == -1;
+        return this.cursor == -1;
     }
 
     @Override
     public boolean isFull(){
-        return ((this.arraySize - 1) == this.lastIndex);
+        return ((this.arraySize - 1) == this.cursor);
     }
 
     //type-returning methods
@@ -104,10 +104,10 @@ public class StaticList implements StaticInterface<Double>{
         Double result = this.data[index];
 
         this.data[index] = null;
-        for (int i = index; i < lastIndex; i++){
+        for (int i = index; i < cursor; i++){
                 this.data[i+1] = this.data[i];
         }
-        this.lastIndex--;
+        this.cursor--;
 
         return result;
     }
