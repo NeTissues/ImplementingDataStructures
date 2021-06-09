@@ -41,12 +41,24 @@ public class NodeStack<Type> implements NodeStackInterface<Type> {
 
     @Override
     public void rotateRight() {
-
+        Node<Type> current = this.head;
+        Node<Type> aux2 = current;
+        this.head = this.head.getNext();
+        while (aux2.getNext() != null){
+            aux2 = aux2.getNext();
+        }
+        aux2.setNext(current);
+        aux2.getNext().setNext(null);
     }
 
     @Override
-    public void rotateLeft() {
-
+    public void rotateLeft() {//this might be wrong. Goes against the definition of a Stack
+        Node<Type> aux2 = this.head;
+        while (aux2.getNext() != null){
+            aux2 = aux2.getNext();
+        }
+        this.push(aux2);
+        // Remove aux2 here <-----
     }
 
     @Override

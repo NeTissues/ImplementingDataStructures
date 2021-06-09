@@ -63,10 +63,11 @@ public class Main {
         IOInterface.show("- peek() = " + nodeStack.peek());
         IOInterface.show("- pop() = " + nodeStack.pop());
         IOInterface.show("- duplicate()");nodeStack.duplicate();
-        IOInterface.show("- pop() = " + nodeStack.pop());
-        IOInterface.show("- pop() = " + nodeStack.pop());
+        //IOInterface.show("- pop() = " + nodeStack.pop());
+        //IOInterface.show("- pop() = " + nodeStack.pop());
         IOInterface.show("- swap()"); nodeStack.swap();
-        //IOInterface.show("- rotateRight()");nodeStack.rotateRight();
+        IOInterface.show("- push(3.0)");nodeStack.push(testingNode2);
+        IOInterface.show("- rotateRight()");nodeStack.rotateRight();
         IOInterface.show("---------------------------------");
 
     }
